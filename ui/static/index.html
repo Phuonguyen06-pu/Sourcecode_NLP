@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phát hiện ngôn từ độc hại tiếng Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <h1>Phát hiện ngôn từ độc hại <span>tiếng Việt</span></h1>
+      <p>Nhập một bình luận hoặc tải cả file để xem mức độ độc hại và cách hệ thống xử lý.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" id="inputCard">
+      <div class="seg" role="tablist" id="modeSeg">
+        <button role="tab" class="on" data-mode="text">Nhập văn bản</button>
+        <button role="tab" data-mode="file">Tải file</button>
+      </div>
+
+      <div id="textPane">
+        <textarea id="textInput" rows="4" placeholder="Nhập bình luận cần kiểm tra..."></textarea>
+      </div>
+
+      <div id="filePane" hidden>
+        <label class="drop" id="drop">
+          <input type="file" id="fileInput" accept=".csv,.xlsx">
+          <span class="drop-title">Chọn file hoặc kéo thả vào đây</span>
+          <span class="drop-sub">.csv hoặc .xlsx, mỗi dòng một câu</span>
+        </label>
+        <div class="file-info" id="fileInfo" hidden>
+          <div class="file-name" id="fileName"></div>
+          <label class="field">Cột chứa văn bản
+            <select id="colSelect"></select>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="runBtn">Chạy</button>
+        <span class="run-status" id="runStatus" aria-live="polite"></span>
+      </div>
+      <div class="notice" id="notice" role="alert" hidden></div>
+    </section>
+
+    <section class="results">
+      <div class="results-head">
+        <h2>Kết quả</h2>
+        <div class="pills" id="pills" role="tablist" aria-label="Chọn mô hình"></div>
+      </div>
+      <div class="card empty" id="empty">Chưa có kết quả. Nhập dữ liệu rồi bấm Chạy.</div>
+      <div id="view" hidden></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
