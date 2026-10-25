@@ -58,7 +58,8 @@ TRANSFORMER_COMMON ={
     "warmup_ratio": 0.1,    
     "max_grad_norm": 1.0, 
     "patience": 2,          # dừng sớm nếu val macro-f1 không tăng
-    "class_weight": True    # loss có trọng số lớp -> xử lý dữ liệu mất cân bằng
+    "class_weight": True,    # loss có trọng số lớp -> xử lý dữ liệu mất cân bằng
+    "class_weight_power": 1.0
 }
 TRANSFORMERS = {
     "phobert": {"hf_name": "vinai/phobert-base-v2"},
