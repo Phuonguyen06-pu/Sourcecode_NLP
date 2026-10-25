@@ -9,7 +9,6 @@ sentencepiece
 fastapi
 uvicorn
 python-multipart
-streamlit
 requests
 matplotlib
 underthesea
