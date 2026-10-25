@@ -48,24 +48,26 @@ BASELINE = {
     "c_grid": [0.1, 0.3, 1.0, 2.0],
 }
 
-# cấu hình fine-tune PhoBERT / VisoBERT
-TRANSFORMER_COMMON ={
-    "max_len": 128,        
-    "batch_size": 32,       # đưa 32 câu xử lý cùng lúc trong mỗi bước train
-    "epochs": 5,            # học đi học lại dữ liệu 5 lần
-    "lr": 2e-5,             
-    "weight_decay": 0.01,   
-    "warmup_ratio": 0.1,    
-    "max_grad_norm": 1.0, 
-    "patience": 2,          # dừng sớm nếu val macro-f1 không tăng
-    "class_weight": True,    # loss có trọng số lớp -> xử lý dữ liệu mất cân bằng
-    "class_weight_power": 1.0
-}
-TRANSFORMERS = {
-    "phobert": {"hf_name": "vinai/phobert-base-v2"},
-    "visobert": {"hf_name": "uitnlp/visobert"}
+": 0.1,
+        "max_grad_norm": 1.0,
+        "patience": 2,
+        "class_weight": True,
+        "class_weight_power": 1.0,
+    },
 }
 
+_TRANSFORMER_KEYS = ("hf_name", "max_len", "batch_size", "epochs", "lr", "weight_decay", "warmup_ratio",
+                     "max_grad_norm", "patience", "class_weight", "class_weight_power")
+
+def get_transformer_cfg(name):
+    '''trả về bản sao cấu hình riêng của mô hình'''
+    if name not in TRANSFORMERS:
+        raise ValueError(f"Mô hình '{name}' không có. Các mô hình hiện có: {list(TRANSFORMERS)}")
+    cfg = dict(TRANSFORMERS[name])
+    missing = [k for k in _TRANSFORMER_KEYS if k not in cfg]
+    if missing:
+        raise KeyError(f"Cấu hình '{name}' thiếu tham số: {missing}")
+    return cfg
 
 def ensure_dirs():
     for d in (DATA_DIR, MODELS_DIR, RESULTS_METRICS, RESULTS_FIGURES, RESULTS_PREDICTIONS):
