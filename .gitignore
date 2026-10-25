@@ -5,5 +5,9 @@ __pycache__/
 venv/
 .env
 .DS_Store
+*.pt
+*.pth
+*.bin
+*.safetensors
 saved_models/*
 !saved_models/.gitkeep
