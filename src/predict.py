@@ -17,9 +17,6 @@ from src.config import LABELS, MODELS_DIR, N_CLASSES, PREPROCESS_PRESETS
 from src.preprocess import clean_text
 
  
-# ngưỡng xử lý: lấy từ config.py nếu có, không thì dùng giá trị mặc định dưới đây
-# mặc định chọn theo tập val của baseline: T_LOW bắt được >= 85% câu độc hại, T_HIGH để câu bị chặn đúng >= ~90%
-# PhoBERT/ViSoBERT phân bố xác suất khác baseline, nên chọn lại ngưỡng sau khi train xong rồi đặt vào config.py
 T_LOW = getattr(cfg, "T_LOW", 0.20)     # điểm độc hại >= T_LOW  -> Cần kiểm tra
 T_HIGH = getattr(cfg, "T_HIGH", 0.80)   # điểm độc hại >= T_HIGH -> Chặn
 CLEAN_ID = getattr(cfg, "CLEAN_ID", 0)  # id của nhãn "BÌNH THƯỜNG"
