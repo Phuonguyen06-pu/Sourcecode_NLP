@@ -48,7 +48,35 @@ BASELINE = {
     "c_grid": [0.1, 0.3, 1.0, 2.0],
 }
 
-": 0.1,
+# cấu hình fine-tune
+# max_len: số token tối đa mỗi câu | batch_size: số câu xử lý cùng lúc mỗi bước train
+# epochs: số lần học lại toàn bộ dữ liệu | lr: tốc độ học | weight_decay: phạt trọng số lớn (chống overfit)
+# warmup_ratio: tỉ lệ bước đầu tăng dần lr | max_grad_norm: ngưỡng cắt gradient
+# patience: dừng sớm nếu val macro-F1 không tăng sau N epoch
+# class_weight / class_weight_power: loss có trọng số lớp để xử lý mất cân bằng (1.0 = nghịch đảo tần suất, 0 = tắt)
+
+TRANSFORMERS = {
+    "phobert": {
+        "hf_name": "vinai/phobert-base-v2",
+        "max_len": 128,
+        "batch_size": 32,
+        "epochs": 5,
+        "lr": 2e-5,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "max_grad_norm": 1.0,
+        "patience": 2,
+        "class_weight": True,
+        "class_weight_power": 1.0,
+    },
+    "visobert": {
+        "hf_name": "uitnlp/visobert",
+        "max_len": 128,
+        "batch_size": 32,
+        "epochs": 5,
+        "lr": 2e-5,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
         "max_grad_norm": 1.0,
         "patience": 2,
         "class_weight": True,
