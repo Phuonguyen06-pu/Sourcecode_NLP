@@ -16,7 +16,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, get_linear_schedule_with_warmup
 
-from src.config import (LABEL_COL, LABELS, MODELS_DIR, N_CLASSES, RANDOM_SEED, TEXT_COL, TRANSFORMER_COMMON, TRANSFORMERS, ensure_dirs)
+from src.config import (LABEL_COL, LABELS, MODELS_DIR, N_CLASSES, RANDOM_SEED, TEXT_COL, TRANSFORMERS, ensure_dirs, get_transformer_cfg)
 from src.data import load_splits
 from src.evaluate import compute_metrics, save_predictions, save_report
 from src.models.transformer_model import collate_ids, encode_texts, pick_device, predict_probs
@@ -82,7 +82,7 @@ def train_one_epoch(model, loader, loss_fn, optimizer, scheduler, scaler, device
 
 
 def run(name, args):
-    cfg = {**TRANSFORMER_COMMON, **TRANSFORMERS[name]}
+    cfg = get_transformer_cfg(name)
     for key in ("epochs", "batch_size", "lr", "max_len", "patience", "class_weight_power"):
         if getattr(args, key) is not None:
             cfg[key] = getattr(args, key)
