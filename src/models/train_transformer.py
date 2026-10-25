@@ -29,10 +29,10 @@ def set_seed(seed):
     torch.cuda.manual_seed_all(seed)
     
     
-def class_weights(y, n_classes):
+def class_weights(y, n_classes, power=1.0):
     '''trọng số lớp = n / (n_lớp * số mẫu của lớp)'''
     counts = np.bincount(y, minlength=n_classes).clip(min=1)
-    return len(y) / (n_classes * counts)
+    return len(y) / (n_classes * counts) ** power
 
 
 def make_optimizer(model, lr, weight_decay):
@@ -83,7 +83,7 @@ def train_one_epoch(model, loader, loss_fn, optimizer, scheduler, scaler, device
 
 def run(name, args):
     cfg = {**TRANSFORMER_COMMON, **TRANSFORMERS[name]}
-    for key in ("epochs", "batch_size", "lr", "max_len"):
+    for key in ("epochs", "batch_size", "lr", "max_len", "patience", "class_weight_power"):
         if getattr(args, key) is not None:
             cfg[key] = getattr(args, key)
             
@@ -126,7 +126,7 @@ def run(name, args):
         generator=gen
     )
     
-    weight = torch.tensor(class_weights(y["train"], N_CLASSES), dtype=torch.float, device=device) \
+    weight = torch.tensor(class_weights(y["train"], N_CLASSES, cfg["class_weight_power"]), dtype=torch.float, device=device) \
         if cfg["class_weight"] else None
     loss_fn = nn.CrossEntropyLoss(weight=weight)
     optimizer = make_optimizer(model, cfg["lr"], cfg["weight_decay"])
@@ -175,7 +175,7 @@ def run(name, args):
         "model": cfg["hf_name"], "best_epoch": best_epoch, "n_params": n_params,
         "seconds": round(time.time() - t0, 1), "history": history,
         "hyperparams": {k: cfg[k] for k in ("max_len", "batch_size", "epochs", "lr", "weight_decay",
-                                            "warmup_ratio", "patience", "class_weight")},
+                                            "warmup_ratio", "patience", "class_weight", "class_weight_power")},
     })
     print(f"  xong sau {time.time() - t0:.0f}s, lưu tại {out_dir}")
     return results
@@ -188,6 +188,9 @@ def main():
     ap.add_argument("--batch-size", dest="batch_size", type=int, default=None)
     ap.add_argument("--lr", type=float, default=None)
     ap.add_argument("--max-len", dest="max_len", type=int, default=None)
+    ap.add_argument("--patience", type=int, default=None, help="số epoch chờ trước khi dừng sớm")
+    ap.add_argument("--class-weight-power", dest="class_weight_power", type=float, default=None,
+                    help="1.0 = trọng số nghịch đảo tần suất, 0.5 = giảm nhẹ, 0 = không dùng trọng số")
     ap.add_argument("--limit", type=int, default=None, help="chỉ dùng N dòng mỗi tập (chạy thử)")
     args = ap.parse_args()
     run(args.model, args)
