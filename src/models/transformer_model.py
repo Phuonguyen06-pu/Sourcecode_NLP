@@ -45,13 +45,13 @@ class TransformerClassifier:
 
     def __init__(self, name, device=None):
         from transformers import AutoModelForSequenceClassification, AutoTokenizer
-        from src.config import MODELS_DIR, TRANSFORMER_COMMON, TRANSFORMERS
+        from src.config import MODELS_DIR, TRANSFORMERS, _TRANSFORMER_KEYS
 
         path = MODELS_DIR / name
         if not path.exists():
             raise FileNotFoundError(f"Chưa có {path}. Chạy train_transformer.py --model {name} trước")
         self.name = name
-        self.max_len = get_transformer_cfg(name)["max_len"]
+        self.max_len = TRANSFORMERS[name]["max_len"]
         self.device = device or pick_device()
         self.tokenizer = AutoTokenizer.from_pretrained(path)
         self.model = AutoModelForSequenceClassification.from_pretrained(path).to(self.device).eval()
