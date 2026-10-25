@@ -1,0 +1,4 @@
+model,val_macro_f1,test_macro_f1,test_weight_f1,test_acc,test_f1_BÌNH THƯỜNG,test_f1_XÚC PHẠM,test_f1_THÙ GHÉT
+visobert,0.6936,0.6741,0.8695,0.8687,0.9349,0.4581,0.6293
+phobert,0.6896,0.6912,0.8725,0.866,0.9332,0.4884,0.6519
+baseline,0.6771,0.6705,0.8745,0.8777,0.9425,0.4372,0.6317
