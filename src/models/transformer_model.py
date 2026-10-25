@@ -51,7 +51,7 @@ class TransformerClassifier:
         if not path.exists():
             raise FileNotFoundError(f"Chưa có {path}. Chạy train_transformer.py --model {name} trước")
         self.name = name
-        self.max_len = {**TRANSFORMER_COMMON, **TRANSFORMERS[name]}["max_len"]
+        self.max_len = get_transformer_cfg(name)["max_len"]
         self.device = device or pick_device()
         self.tokenizer = AutoTokenizer.from_pretrained(path)
         self.model = AutoModelForSequenceClassification.from_pretrained(path).to(self.device).eval()
