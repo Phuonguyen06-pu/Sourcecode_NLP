@@ -1,0 +1,126 @@
+{
+  "model": "phobert",
+  "val": {
+    "accuracy": 0.8671328671328671,
+    "macro_f1": 0.6896190895067628,
+    "weighted_f1": 0.8737827048491582,
+    "per_class": {
+      "BÌNH THƯỜNG": {
+        "precision": 0.9553684210526315,
+        "recall": 0.9171382376717866,
+        "f1": 0.9358630645493916,
+        "support": 2474
+      },
+      "XÚC PHẠM": {
+        "precision": 0.4290909090909091,
+        "recall": 0.5841584158415841,
+        "f1": 0.4947589098532495,
+        "support": 202
+      },
+      "THÙ GHÉT": {
+        "precision": 0.6147308781869688,
+        "recall": 0.6636085626911316,
+        "f1": 0.638235294117647,
+        "support": 327
+      }
+    },
+    "confusion_matrix": [
+      [
+        2269,
+        105,
+        100
+      ],
+      [
+        48,
+        118,
+        36
+      ],
+      [
+        58,
+        52,
+        217
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.8659966499162479,
+    "macro_f1": 0.691155975076773,
+    "weighted_f1": 0.8725191612323288,
+    "per_class": {
+      "BÌNH THƯỜNG": {
+        "precision": 0.9521591871295513,
+        "recall": 0.9149715215622457,
+        "f1": 0.933195020746888,
+        "support": 2458
+      },
+      "XÚC PHẠM": {
+        "precision": 0.4233576642335766,
+        "recall": 0.5771144278606966,
+        "f1": 0.4884210526315789,
+        "support": 201
+      },
+      "THÙ GHÉT": {
+        "precision": 0.6303724928366762,
+        "recall": 0.6748466257668712,
+        "f1": 0.6518518518518519,
+        "support": 326
+      }
+    },
+    "confusion_matrix": [
+      [
+        2249,
+        109,
+        100
+      ],
+      [
+        56,
+        116,
+        29
+      ],
+      [
+        57,
+        49,
+        220
+      ]
+    ]
+  },
+  "extra": {
+    "model": "vinai/phobert-base-v2",
+    "best_epoch": 2,
+    "n_params": 135000579,
+    "seconds": 622.5,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.6828,
+        "val_macro_f1": 0.6542
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.4887,
+        "val_macro_f1": 0.6896
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.3653,
+        "val_macro_f1": 0.6763
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.2856,
+        "val_macro_f1": 0.6703
+      }
+    ],
+    "hyperparams": {
+      "max_len": 128,
+      "batch_size": 16,
+      "epochs": 5,
+      "lr": 2e-05,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "patience": 2,
+      "class_weight": true,
+      "class_weight_power": 0.5
+    }
+  }
+}

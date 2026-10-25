@@ -1,0 +1,141 @@
+{
+  "model": "visobert",
+  "val": {
+    "accuracy": 0.8747918747918748,
+    "macro_f1": 0.6936400743232465,
+    "weighted_f1": 0.8771488738892654,
+    "per_class": {
+      "BÌNH THƯỜNG": {
+        "precision": 0.9435120753172329,
+        "recall": 0.9316895715440582,
+        "f1": 0.9375635550132194,
+        "support": 2474
+      },
+      "XÚC PHẠM": {
+        "precision": 0.44396551724137934,
+        "recall": 0.5099009900990099,
+        "f1": 0.47465437788018433,
+        "support": 202
+      },
+      "THÙ GHÉT": {
+        "precision": 0.6676829268292683,
+        "recall": 0.6697247706422018,
+        "f1": 0.6687022900763359,
+        "support": 327
+      }
+    },
+    "confusion_matrix": [
+      [
+        2305,
+        98,
+        71
+      ],
+      [
+        61,
+        103,
+        38
+      ],
+      [
+        77,
+        31,
+        219
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.8686767169179229,
+    "macro_f1": 0.6741384475016073,
+    "weighted_f1": 0.8694568733269143,
+    "per_class": {
+      "BÌNH THƯỜNG": {
+        "precision": 0.9374233128834356,
+        "recall": 0.9324654190398698,
+        "f1": 0.9349377931878442,
+        "support": 2458
+      },
+      "XÚC PHẠM": {
+        "precision": 0.45365853658536587,
+        "recall": 0.4626865671641791,
+        "f1": 0.458128078817734,
+        "support": 201
+      },
+      "THÙ GHÉT": {
+        "precision": 0.6208955223880597,
+        "recall": 0.6380368098159509,
+        "f1": 0.6293494704992436,
+        "support": 326
+      }
+    },
+    "confusion_matrix": [
+      [
+        2292,
+        84,
+        82
+      ],
+      [
+        63,
+        93,
+        45
+      ],
+      [
+        90,
+        28,
+        208
+      ]
+    ]
+  },
+  "extra": {
+    "model": "uitnlp/visobert",
+    "best_epoch": 4,
+    "n_params": 97568259,
+    "seconds": 833.1,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.8613,
+        "val_macro_f1": 0.6051
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.5953,
+        "val_macro_f1": 0.6525
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.3948,
+        "val_macro_f1": 0.6707
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.2289,
+        "val_macro_f1": 0.6936
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.1274,
+        "val_macro_f1": 0.6912
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.0683,
+        "val_macro_f1": 0.6914
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.0319,
+        "val_macro_f1": 0.6891
+      }
+    ],
+    "hyperparams": {
+      "max_len": 128,
+      "batch_size": 32,
+      "epochs": 8,
+      "lr": 2e-05,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "patience": 3,
+      "class_weight": true,
+      "class_weight_power": 1.0
+    }
+  }
+}
