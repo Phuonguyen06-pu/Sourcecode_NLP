@@ -13,6 +13,7 @@ Mô hình:
 - B5: chạy `python ui/api.py` rồi copy đường dẫn lên web để chạy
 
 Note: vì file trọng số mô hình quá nặng không push được lên github nên nhóm sẽ để lên hugging face, khi chạy sẽ tải mô hình về
+link trọng số mô hình: https://huggingface.co/Uyen1
 
 ### Nguồn dữ liệu
 https://huggingface.co/datasets/uitnlp/vihsd
